@@ -1,0 +1,99 @@
+>>SONARQUBE:
+
+           SonarQube is a code quality management platform that allows developer teams to manage, track and eventually improve the quality of the source code. 
+It’s a web based application that keeps historical data of a variety of metrics and gives trends of leading and lagging indicators for all seven deadly sins of developers.
+           
+           Sonar is an open source platform used by development teams to manage source code quality. Sonar has been developed with a main objective in mind
+make code quality management accessible to everyone with minimal effort. 
+           
+           As such, Sonar provides code analyzers, reporting tools, defects hunting modules and TimeMachine as core function. But it also embarks a plugin mechanism enabling 
+the community to extend the functionality, making Sonar the one-stop-shop for source code quality by addressing not only developers but also managers needs.
+
+>>SONARLINT:
+
+           SonarLint is a free IDE extension open source, and available in the Visual Studio Gallery, which supports C#, VB.NET which will help you fix code quality issues 
+before they even exist.
+           
+           Like a spell checker, SonarLint highlights Bugs and Security Vulnerabilities as you write code, with clear remediation guidance so you can fix them before the 
+code is even committed. 
+          
+           Across popular IDEs (Eclipse, IntelliJ, Visual Studio, VS Code) and popular programming languages, SonarLint helps all developers write better and safer code.
+They have feature like Instant View, On-the-fly Detection, Smart Education, Push Notifications, Connected Mode
+
+>>ARRAYS IN JAVA:
+
+           Arrays are used to store multiple values in a single variable, instead of declaring separate variables for each value. To declare an array, define the variable 
+type with square brackets
+
+ Java array is an object which contains elements of a similar data type. Additionally, The elements of an array are stored in a contiguous memory location. 
+It is a data structure where we store similar elements.
+We can store only a fixed set of elements in a Java array.
+
+Array in Java is index-based, the first element of the array is stored at the 0th index, 2nd element is stored on 1st index and so on.
+
+>>Java Program
+
+public class Main{
+public static void main(String[] args){
+        int[] myarray;          //declaration
+        myarray = new int[5];   //instantiation
+        myarray[0] = 10;        //initialization
+        System.out.println("myarray[0] = " + myarray[0]);  //accessing and printing array elements
+        System.out.println("myarray[1] = " + myarray[1]);
+        int [] oddArray = {1,3,5,7};    //initialization with array literal
+            System.out.println("oddArray[0] = " + oddArray[0]);
+        System.out.println("oddArray[1] = " + oddArray[1]);
+        System.out.println("oddArray[2] = " + oddArray[2]);
+        System.out.println("oddArray[3] = " + oddArray[3]);
+        }}
+        
+>>JAVA PROGRAM FOR STATIC VARIABLES:       
+        
+public class main{
+   static int count=0;
+       count++;
+   public static void main(String args[])
+   {
+       VariableDemo obj1=new VariableDemo();
+       VariableDemo obj2=new VariableDemo();
+       System.out.println("Obj1: count is="+obj1.count);
+       System.out.println("Obj2: count is="+obj2.count);
+   }
+}   
+
+>>JAVA PROGRAM FOR INSTANCE VARIABLE:
+
+public class instance variable{
+	int instance;
+	static String static;
+	public void method() {
+		final String local= "Initial Value";
+		System.out.println(local);
+    }
+	public static void main(String args[]) {
+		instancevariable obj = new instancevariable();
+		System.out.println(obj.instance);
+		System.out.println(obj.static);
+    System.out.println(instancevariable.static);
+                System.out.println(new instancevariable().instance);
+	}}
+  
+>>JAVA PROGRAM FOR CONTROL STATEMENTS:
+  
+  public class controlstatements{
+ public static void main(String[] args) {      
+  controlstatements obj = new controlstatements();
+  System.out.println("Please enter a number");
+  int n=in.nextInt();       
+if(n%2==0){
+   System.out.println(n+" is even number");
+   }
+   if(n%2!=0){
+     System.out.println(n+" is odd number");
+}}}
+ 
+
+
+        
+
+        
