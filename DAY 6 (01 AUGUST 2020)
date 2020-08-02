@@ -1,0 +1,316 @@
+>> NODE.JS BUFFERS:
+
+           The buffers module provides a way of handling streams of binary data.The Buffer object is a global object in Node.js, and it is not necessary to import it using the require keyword.
+ Buffer is a in-built module for node js. It is used to handle binary data.
+ 
+           Pure JavaScript is Unicode friendly, but it is not so for binary data. While dealing with TCP streams or the file system, it's necessary to handle octet streams. Node provides Buffer 
+class which provides instances to store raw data similar to an array of integers but corresponds to a raw memory allocation outside the V8 heap.Buffer class is a global class that can be accessed 
+in an application without importing the buffer module.
+     
+Creating Buffers:
+
+Node Buffer can be constructed in a variety of ways.
+
+Method 1:
+Following is the syntax to create an uninitiated Buffer of 10 octets :−
+                 var buf = new Buffer(10);
+Method 2:
+Following is the syntax to create a Buffer from a given array :−
+
+                 var buf = new Buffer([10, 20, 30, 40, 50]);
+Method 3:
+Following is the syntax to create a Buffer from a given string and optionally encoding type :−
+
+                var buf = new Buffer("Simply Easy Learning", "utf-8");
+Though "utf8" is the default encoding, you can use any of the following encodings "ascii", "utf8", "utf16le", "ucs2", "base64" or "hex".
+
+Example Program:
+
+            buf = new Buffer(256);
+            len = buf.write("Simply Easy Learning");
+            console.log("Octets written : "+  len);
+
+o/p:- Octets Written : 20
+
+>> CONVERT BUFFER TO JSON:
+
+Syntax:
+        buf.toJSON()
+              
+Return Value:  This method returns a JSON-representation of the Buffer instance.
+
+Example Program:
+
+           var buf = new Buffer('Simply Easy Learning');
+           var json = buf.toJSON(buf);
+
+           console.log(json);
+
+
+O/P: { type: 'Buffer',
+        data: 
+        [ 
+           83,
+           105,
+           109,
+           112,
+           108,
+           121,
+           32,
+           69,
+           97,
+           115,
+           121,
+           32,
+           76,
+           101,
+           97,
+           114,
+           110,
+           105,
+           110,
+           103 
+        ]
+      }
+      
+>> FILE SYSTEMS IN NODE.JS SYNCHRONOUS AND ASYNCHRONOUS:
+
+                 Node implements File I/O using simple wrappers around standard POSIX functions. 
+The Node File System (fs) module can be imported using the following syntax 
+
+SYNTAX:-  var fs = require("fs")
+                                                 
+                 Every method in the fs module has synchronous as well as asynchronous forms. Asynchronous methods take the last parameter as the completion function callback
+and the first parameter of the callback function as error. It is better to use an asynchronous method instead of a synchronous method, as the former never blocks a program
+during its execution whereas the second one does
+
+Example Program:-
+
+var fs = require("fs");
+
+// Asynchronous read
+fs.readFile('input.txt', function (err, data) {
+   if (err) {
+      return console.error(err);
+   }
+   console.log("Asynchronous read: " + data.toString());
+});
+
+// Synchronous read
+var data = fs.readFileSync('input.txt');
+console.log("Synchronous read: " + data.toString());
+
+console.log("Program Ended");
+
+---> OPEN A FILE:
+
+SYNTAX: fs.open(path, flags[, mode], callback)
+
+Example Program:-
+var fs = require("fs");
+
+// Asynchronous - Opening File
+console.log("Going to open file!");
+fs.open('input.txt', 'r+', function(err, fd) {
+   if (err) {
+      return console.error(err);
+   }
+   console.log("File opened successfully!");     
+});
+
+---> GET THE FILE INFORMATION:
+
+SYNTAX:- fs.stat(path, callback)
+
+Example Program:-
+
+var fs = require("fs");
+
+console.log("Going to get file info!");
+fs.stat('input.txt', function (err, stats) {
+   if (err) {
+      return console.error(err);
+   }
+   console.log(stats);
+   console.log("Got file info successfully!");
+   
+   // Check file type
+   console.log("isFile ? " + stats.isFile());
+   console.log("isDirectory ? " + stats.isDirectory());    
+});
+
+---> WRITE FILE:
+
+SYNTAX:- fs.writeFile(filename, data[, options], callback)
+
+Example Program:-
+
+var fs = require("fs");
+
+console.log("Going to write into existing file");
+fs.writeFile('input.txt', 'Simply Easy Learning!', function(err) {
+   if (err) {
+      return console.error(err);
+   }
+   
+   console.log("Data written successfully!");
+   console.log("Let's read newly written data");
+   
+   fs.readFile('input.txt', function (err, data) {
+      if (err) {
+         return console.error(err);
+      }
+      console.log("Asynchronous read: " + data.toString());
+   });
+});
+
+---> READ A FILE:
+
+SYNTAX:- fs.read(fd, buffer, offset, length, position, callback)
+
+Example Program:
+
+var fs = require("fs");
+var buf = new Buffer(1024);
+
+console.log("Going to open an existing file");
+fs.open('input.txt', 'r+', function(err, fd) {
+   if (err) {
+      return console.error(err);
+   }
+   console.log("File opened successfully!");
+   console.log("Going to read the file");
+   
+   fs.read(fd, buf, 0, buf.length, 0, function(err, bytes){
+      if (err){
+         console.log(err);
+      }
+      console.log(bytes + " bytes read");
+      
+      // Print only read bytes to avoid junk.
+      if(bytes > 0){
+         console.log(buf.slice(0, bytes).toString());
+      }
+   });
+});
+
+---> CLOSE A FILE:
+
+SYNTAX:- fs.close(fd, callback)
+
+Example Program:
+
+var fs = require("fs");
+var buf = new Buffer(1024);
+
+console.log("Going to open an existing file");
+fs.open('input.txt', 'r+', function(err, fd) {
+   if (err) {
+      return console.error(err);
+   }
+   console.log("File opened successfully!");
+   console.log("Going to read the file");
+   
+   fs.read(fd, buf, 0, buf.length, 0, function(err, bytes) {
+      if (err) {
+         console.log(err);
+      }
+
+      // Print only read bytes to avoid junk.
+      if(bytes > 0) {
+         console.log(buf.slice(0, bytes).toString());
+      }
+
+      // Close the opened file.
+      fs.close(fd, function(err) {
+         if (err) {
+            console.log(err);
+         } 
+         console.log("File closed successfully.");
+      });
+   });
+});
+
+---> DELETE A FILE:
+
+SYNTAX: fs.unlink(path, callback)
+
+Example Program:
+
+var fs = require("fs");
+
+console.log("Going to delete an existing file");
+fs.unlink('input.txt', function(err) {
+   if (err) {
+      return console.error(err);
+   }
+   console.log("File deleted successfully!");
+});
+
+
+
+
+>> NPM:
+        npm (originally short for Node Package Manager) is a package manager for the JavaScript programming language. It is the default 
+package manager for the JavaScript runtime environment Node.js. It consists of a command line client, also called npm, and an online 
+database of public and paid-for private packages, called the npm registry. The registry is accessed via the client, and the available 
+packages can be browsed and searched via the npm website. The package manager and the registry are managed by npm, Inc.
+
+>> LIST OF ALL PACKAGES IN NPM:
+
+React
+Prop-types
+Moment
+Express
+Request
+Lodash
+Async
+chalk
+Commander
+Debug
+react-dom
+tslib
+axios
+fs-extra
+vue
+bluebird
+uuid
+classnames
+core-js
+inquirer
+underscore
+yargs
+webpack
+rxjs
+mkdirp
+glob
+body-parser
+typescript
+dotenz
+colors
+jquery
+minimist
+@types/node
+@babel/runtime
+aws-sdk
+babel-runtime
+semver
+babel-loader
+node-fetch
+redux
+eslint
+winston
+css-loader
+rimraf
+babel-core
+yeoman-generator
+js-yaml
+ora
+@angular/core
+styled-components
+babel-eslint
+jsonwebton.
+
+>>
+
+
